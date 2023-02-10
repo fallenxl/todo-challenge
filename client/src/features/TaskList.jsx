@@ -8,15 +8,15 @@ function TaskList() {
     <section className="px-2">
       <div className="flex justify-between mb-4 border-b py-4">
         <h2 className="font-bold">
-          Task List <span className="font-thin text-sm">{"All(3)"}</span>
+          Task List <span className="font-thin text-sm">{`All(${tasks.length})`}</span>
         </h2>
         <div className="flex items-center justify-center gap-2">
           <button className="bg-blue-500 hover:bg-blue-600 justify-self-end self-center text-white px-6 py-1 rounded-md text-xs">
             Delete all
           </button>
-          <button className="bg-blue-500 hover:bg-blue-600 justify-self-end self-center text-white px-6 py-1 rounded-md text-xs">
+          {selectedTask.length > 0 && <button className="bg-blue-500 hover:bg-blue-600 justify-self-end self-center text-white px-6 py-1 rounded-md text-xs">
            {`Delete selected (${selectedTask.length})`}
-          </button>
+          </button>}
         </div>
       </div>
 
