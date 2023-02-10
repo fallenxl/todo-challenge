@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getApiTasks, deleteApiTasks } from "../store/taskSlice";
 import ButtonsDelete from "./ButtonsDelete";
+import EmptyTasks from "../components/EmptyTasks";
 
 function TaskList() {
   const dispatch = useDispatch();
@@ -22,17 +23,25 @@ function TaskList() {
 
   return (
     <section className="px-2">
-      {tasks.length > 0 && (
-        <ButtonsDelete
-          handleDeleteSelected={handleDeleteSelected}
-          selectedTask={selectedTask}
-        />
+      {tasks.length > 0 ? (
+        <>
+          <ButtonsDelete
+            handleDeleteSelected={handleDeleteSelected}
+            selectedTask={selectedTask}
+          />
+          <ul className="mb-4">
+            {tasks.map((task) => (
+              <Task
+                key={task.id}
+                task={task}
+                handleSelected={handleSelectedTask}
+              />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <EmptyTasks />
       )}
-      <ul className="mb-4">
-        {tasks.map((task) => (
-          <Task key={task.id} task={task} handleSelected={handleSelectedTask} />
-        ))}
-      </ul>
     </section>
   );
 }
