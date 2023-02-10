@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 function Header() {
   return (
-    <header className="p-4 mb-4">
+    <header className="p-4 mb-4 row-start-1">
       <nav className="flex justify-between items-center">
         <h1 className="font-bold text-lg">
           ToDo<span className="font-thin">Today</span>

@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 
 function App() {
   return (
-    <div className="max-w-xl m-auto">
+    <div className="app max-w-xl min-h-screen mx-auto">
       <Router>
         <Header />
         <Routes>

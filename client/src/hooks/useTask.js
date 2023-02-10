@@ -1,20 +1,33 @@
-import { useState } from "react";
-export function useTask(initialValue = "") {
-  const [task, setTask] = useState(initialValue);
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getApiTasks } from "../store/taskSlice";
+
+export function useTask() {
+  const {tasks} = useSelector((state) => state.task);
+  const dispatch = useDispatch();
+
   const [selectedTask, setSelectedTask] = useState([]);
-  const handleTaskChange = (e) => {
-    setTask(e.target.value);
-  };
+  const [isTaskAdded, setIsTaskAdded] = useState(false);
+
+  useEffect(() => {
+    dispatch(getApiTasks());
+  },[isTaskAdded]);
+
+  const handleTaskAdded = () => {
+    setIsTaskAdded(!isTaskAdded);
+  }
   const handleSelectedTask = (e) => {
     const { id } = e.target;
     !selectedTask.includes(id)
       ? setSelectedTask([...selectedTask, id])
       : setSelectedTask(selectedTask.filter((item) => item !== id));
   };
+
   return {
-    task,
+    tasks,
     selectedTask,
-    handleTaskChange,
     handleSelectedTask,
+    getApiTasks,
+    handleTaskAdded
   };
 }
