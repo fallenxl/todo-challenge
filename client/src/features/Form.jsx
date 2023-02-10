@@ -8,6 +8,7 @@ function Form() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!content) return;
     dispatch(postApiTask({content}));
     handleContentClear();
   }

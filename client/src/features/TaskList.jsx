@@ -1,29 +1,31 @@
 import Task from "./Task";
 import { useTask } from "../hooks/useTask";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getApiTasks, deleteApiTasks } from "../store/taskSlice";
 import ButtonsDelete from "./ButtonsDelete";
 import EmptyTasks from "../components/EmptyTasks";
+import LoadingTasks from "../components/Loading/LoadingTasks";
 
 function TaskList() {
   const dispatch = useDispatch();
-  const { tasks } = useSelector((state) => state.task);
+  const { tasks, isLoading } = useSelector((state) => state.task);
   const { selectedTask, handleSelectedTask, handleClearSelectedTask } =
     useTask();
+  const hasTasks = tasks.length > 0;
 
   useEffect(() => {
-    dispatch(getApiTasks());
+      dispatch(getApiTasks());
   }, []);
 
   const handleDeleteSelected = () => {
     dispatch(deleteApiTasks({ selectedTask }));
     handleClearSelectedTask();
   };
-
   return (
     <section className="px-2">
-      {tasks.length > 0 ? (
+  
+      {hasTasks ? (
         <>
           <ButtonsDelete
             handleDeleteSelected={handleDeleteSelected}
@@ -40,7 +42,8 @@ function TaskList() {
           </ul>
         </>
       ) : (
-        <EmptyTasks />
+        isLoading ? <LoadingTasks /> : <EmptyTasks />
+      
       )}
     </section>
   );

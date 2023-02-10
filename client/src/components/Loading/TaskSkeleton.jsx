@@ -1,28 +1,19 @@
-import { useDispatch } from "react-redux";
-import { deleteApiTask } from "../store/taskSlice";
-
-function Task({ task = {}, handleSelected  }) {
-  const dispatch = useDispatch();
-
-  const handleDelete = () => {
-    dispatch(deleteApiTask(task.id));
-  };
-  
+import './loading.css'
+function TaskSkeleton() {
   return (
     <li
       className="grid grid-cols-8 grid-rows-1 place-content-center items-center
-     px-1 py-3 border-b"
+             px-1 py-3 border-b"
     >
       <input
         type="checkbox"
-        id={task.id}
-        onChange={handleSelected}
         className="w-4 h-4 "
+        disabled={true}
       />
-      <span className="col-start-2 col-end-7 sm:col-end-8">{task.content}</span>
+      <span className="content-loading col-start-2 col-end-7 sm:col-end-8">{}</span>
       <button
-        onClick={handleDelete}
         className="col-start-8 col-end-9 justify-self-end self-center px-6 py-1 rounded-md text-xs"
+        disabled={true}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,4 +33,4 @@ function Task({ task = {}, handleSelected  }) {
     </li>
   );
 }
-export default Task;
+export default TaskSkeleton;
