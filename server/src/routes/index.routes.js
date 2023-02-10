@@ -1,8 +1,9 @@
 const { Router } = require("express");
-
+const authRouter = require("./auth.routes.js");
+const taskRouter = require("./task.routes.js");
 const router = Router();
-router.get("/auth", (req, res) => {
-    res.json({ message: "Hello from server!" });
-})
+
+router.use("/auth", authRouter);
+router.use("/task", taskRouter);
 
 module.exports = router;
