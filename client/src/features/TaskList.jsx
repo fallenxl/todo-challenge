@@ -22,6 +22,7 @@ function TaskList() {
     dispatch(deleteApiTasks({ selectedTask }));
     handleClearSelectedTask();
   };
+
   return (
     <section className="px-2">
   
