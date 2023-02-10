@@ -1,4 +1,13 @@
+import { useDispatch } from "react-redux";
+import { deleteApiTask } from "../store/taskSlice";
+
 function Task({ task, handleSelected }) {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteApiTask(task.id));
+  };
+  
   return (
     <li
       className="grid grid-cols-8 grid-rows-1 place-content-center items-center
@@ -10,10 +19,11 @@ function Task({ task, handleSelected }) {
         onChange={handleSelected}
         className="w-4 h-4 "
       />
-      <span className="col-start-2 col-end-7 sm:col-end-8">
-        {task.content}
-      </span>
-      <button className="col-start-8 col-end-9 justify-self-end self-center px-6 py-1 rounded-md text-xs">
+      <span className="col-start-2 col-end-7 sm:col-end-8">{task.content}</span>
+      <button
+        onClick={handleDelete}
+        className="col-start-8 col-end-9 justify-self-end self-center px-6 py-1 rounded-md text-xs"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

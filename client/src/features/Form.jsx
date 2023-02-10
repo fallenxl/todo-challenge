@@ -1,12 +1,14 @@
 import { useContent } from "../hooks/useContent";
-import { postApiTask } from "../services/tasks";
+import { useDispatch } from "react-redux";
+import { postApiTask } from "../store/taskSlice";
 
-function Form({ content, handleContentChange, handleTaskAdded, handleContentClear}) {
+function Form() {
+  const dispatch = useDispatch();
+  const {content, handleContentChange, handleContentClear} = useContent();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postApiTask(content);
-    handleTaskAdded();
+    dispatch(postApiTask({content}));
     handleContentClear();
   }
   return (
@@ -18,6 +20,7 @@ function Form({ content, handleContentChange, handleTaskAdded, handleContentClea
         name="name"
         onChange={handleContentChange}
         value={content}
+        placeholder='"Buy milk, eggs, and bread"'
       />
       <button className="bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-1 rounded-md text-xs">Add</button>
     </form>

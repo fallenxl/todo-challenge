@@ -23,11 +23,15 @@ export function useTask() {
       : setSelectedTask(selectedTask.filter((item) => item !== id));
   };
 
+  const handleClearSelectedTask = () => {
+    setSelectedTask([]);
+  }
   return {
     tasks,
     selectedTask,
     handleSelectedTask,
     getApiTasks,
-    handleTaskAdded
+    handleTaskAdded,
+    handleClearSelectedTask,
   };
 }

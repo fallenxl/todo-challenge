@@ -1,35 +1,33 @@
 import Task from "./Task";
+import { useTask } from "../hooks/useTask";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getApiTasks } from "../store/taskSlice";
+import { getApiTasks, deleteApiTasks } from "../store/taskSlice";
+import ButtonsDelete from "./ButtonsDelete";
 
-function TaskList({ selectedTask, handleSelectedTask }) {
+function TaskList() {
   const dispatch = useDispatch();
   const { tasks } = useSelector((state) => state.task);
+  const { selectedTask, handleSelectedTask, handleClearSelectedTask } =
+    useTask();
 
   useEffect(() => {
     dispatch(getApiTasks());
   }, []);
 
+  const handleDeleteSelected = () => {
+    dispatch(deleteApiTasks({ selectedTask }));
+    handleClearSelectedTask();
+  };
+
   return (
     <section className="px-2">
-      <div className="flex justify-between mb-4 border-b py-4">
-        <h2 className="font-bold">
-          Task List{" "}
-          <span className="font-thin text-sm">{`All(${tasks.length})`}</span>
-        </h2>
-        <div className="flex items-center justify-center gap-2">
-          <button className="bg-blue-500 hover:bg-blue-600 justify-self-end self-center text-white px-6 py-1 rounded-md text-xs">
-            Delete all
-          </button>
-          {selectedTask.length > 0 && (
-            <button className="bg-blue-500 hover:bg-blue-600 justify-self-end self-center text-white px-6 py-1 rounded-md text-xs">
-              {`Delete selected (${selectedTask.length})`}
-            </button>
-          )}
-        </div>
-      </div>
-
+      {tasks.length > 0 && (
+        <ButtonsDelete
+          handleDeleteSelected={handleDeleteSelected}
+          selectedTask={selectedTask}
+        />
+      )}
       <ul className="mb-4">
         {tasks.map((task) => (
           <Task key={task.id} task={task} handleSelected={handleSelectedTask} />

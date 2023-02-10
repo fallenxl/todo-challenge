@@ -28,7 +28,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
 .then(() => {console.log('Database is connected')});
 
 app.listen(port, () => {

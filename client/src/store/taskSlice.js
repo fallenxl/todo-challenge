@@ -24,7 +24,8 @@ const taskSlice = createSlice({
 });
 
 export default taskSlice.reducer;
-export const { setTasks, setTasksIsFailed, setTasksIsLoading } = taskSlice.actions;
+export const { setTasks, setTasksIsFailed, setTasksIsLoading } =
+  taskSlice.actions;
 
 export const getApiTasks = () => async (dispatch) => {
   try {
@@ -33,7 +34,44 @@ export const getApiTasks = () => async (dispatch) => {
     dispatch(setTasksIsLoading(false));
     dispatch(setTasks(data));
   } catch (error) {
-      console.log(error);
+    console.log(error);
     dispatch(setTasksIsFailed(true));
   }
 };
+
+export const postApiTask =
+  ({ content }) =>
+  async (dispatch) => {
+    try {
+      dispatch(setTasksIsLoading(true));
+      await axios.post(apiUrl, { content });
+      dispatch(setTasksIsLoading(false));
+      dispatch(getApiTasks());
+    } catch (error) {
+      dispatch(setTasksIsFailed(true));
+    }
+  };
+
+export const deleteApiTask = (id) => async (dispatch) => {
+  try {
+    dispatch(setTasksIsLoading(true));
+    await axios.delete(`${apiUrl}/${id}`);
+    dispatch(setTasksIsLoading(false));
+    dispatch(getApiTasks());
+  } catch (error) {
+    dispatch(setTasksIsFailed(true));
+  }
+}
+
+export const deleteApiTasks = ({selectedTask}) => async (dispatch) => {
+  try {
+    dispatch(setTasksIsLoading(true));
+    await axios.delete(apiUrl, {"data": {
+      tasksId: selectedTask
+    }});
+    dispatch(setTasksIsLoading(false));
+    dispatch(getApiTasks());
+  } catch (error) {
+    dispatch(setTasksIsFailed(true));
+  }
+}
