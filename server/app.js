@@ -3,10 +3,10 @@ const path = require('path');
 const cors = require('cors');
 const indexRouter = require('./src/routes/index.routes.js');
 const sequelize = require('./src/database/database.js');
-
+const passport = require('passport');
 const app = express();
 const port = 3000 || process.env.PORT;
-
+require("./src/config/passport.js")
 
 /*
  * Middlewares 
@@ -15,6 +15,8 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(passport.initialize());
+
 /*
  * Routes
  */

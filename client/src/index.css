@@ -4,11 +4,6 @@
 
 .app{
     display: grid;
-    grid-template-rows: 15% auto 1fr;
+    grid-template-rows: 100px auto 1fr;
 }
 
-@media screen and (max-width: 768px){
-    .app{
-        grid-template-rows: 10% auto 1fr;
-    }
-}

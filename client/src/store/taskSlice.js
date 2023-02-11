@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const apiUrl = "http://localhost:3000/api/task";
@@ -27,14 +28,17 @@ export default taskSlice.reducer;
 export const { setTasks, setTasksIsFailed, setTasksIsLoading } =
   taskSlice.actions;
 
-export const getApiTasks = () => async (dispatch) => {
+export const getApiTasks = (token) => async (dispatch) => {
   try {
     dispatch(setTasksIsLoading(true));
-    const { data } = await axios.get(apiUrl);
+    const { data } = await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch(setTasksIsLoading(false));
     dispatch(setTasks(data));
   } catch (error) {
-    console.log(error);
     dispatch(setTasksIsFailed(true));
   }
 };
@@ -55,23 +59,37 @@ export const postApiTask =
 export const deleteApiTask = (id) => async (dispatch) => {
   try {
     dispatch(setTasksIsLoading(true));
-    await axios.delete(`${apiUrl}/${id}`);
+    await axios.delete(`${apiUrl}/delete/${id}`);
     dispatch(setTasksIsLoading(false));
     dispatch(getApiTasks());
   } catch (error) {
     dispatch(setTasksIsFailed(true));
   }
-}
+};
 
-export const deleteApiTasks = ({selectedTask}) => async (dispatch) => {
+export const deleteApiTasks =
+  ({ selectedTask }) =>
+  async (dispatch) => {
+    try {
+      dispatch(setTasksIsLoading(true));
+      await axios.delete(apiUrl + "/delete", {
+        data: {
+          tasksId: selectedTask,
+        },
+      });
+      dispatch(setTasksIsLoading(false));
+      dispatch(getApiTasks());
+    } catch (error) {
+      dispatch(setTasksIsFailed(true));
+    }
+  };
+export const deleteAllTasks = () => async (dispatch) => {
   try {
     dispatch(setTasksIsLoading(true));
-    await axios.delete(apiUrl, {"data": {
-      tasksId: selectedTask
-    }});
+    await axios.delete(apiUrl);
     dispatch(setTasksIsLoading(false));
     dispatch(getApiTasks());
   } catch (error) {
     dispatch(setTasksIsFailed(true));
   }
-}
+};

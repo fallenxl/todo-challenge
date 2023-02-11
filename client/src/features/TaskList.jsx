@@ -10,12 +10,13 @@ import LoadingTasks from "../components/Loading/LoadingTasks";
 function TaskList() {
   const dispatch = useDispatch();
   const { tasks, isLoading } = useSelector((state) => state.task);
+  const { token } = useSelector((state) => state.user);
   const { selectedTask, handleSelectedTask, handleClearSelectedTask } =
     useTask();
   const hasTasks = tasks.length > 0;
 
   useEffect(() => {
-      dispatch(getApiTasks());
+      dispatch(getApiTasks(token));
   }, []);
 
   const handleDeleteSelected = () => {
