@@ -31,12 +31,18 @@ const userSlice = createSlice({
       state.userIsLoggedIn = true;
       state.userIsFailed = false;
       state.userIsLoading = false;
-    }
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { setUser, setToken, userIsFailed, userIsLoggedIn, userIsLoading } = userSlice.actions;
+export const {
+  setUser,
+  setToken,
+  userIsFailed,
+  userIsLoggedIn,
+  userIsLoading,
+} = userSlice.actions;
 
 export const login =
   ({ username, password }) =>
@@ -67,9 +73,10 @@ export const register =
         "http://localhost:3000/api/auth/register",
         { username, password }
       );
-      console.log({ username, password });
-      if (response.status === 200) {
-        dispatch(login(username, password));
+      if (response.status === 201) {
+        dispatch(setUser(response.data));
+        dispatch(setToken(response.data.token));
+        localStorage.setItem("jwt", response.data.token);
       }
     } catch (error) {
       dispatch(userIsFailed());
@@ -79,12 +86,13 @@ export const register =
 export const getUser = (token) => async (dispatch) => {
   try {
     dispatch(userIsLoading());
-    const response = await axios.get("http://localhost:3000/api/auth/user",{
+    const response = await axios.get("http://localhost:3000/api/auth/user", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     if (response.status === 200) {
+      console.log(response.data);
       dispatch(setUser(response.data.user));
       dispatch(setToken(token));
     }
@@ -97,4 +105,4 @@ export const logout = () => async (dispatch) => {
   dispatch(setUser(null));
   dispatch(setToken(null));
   localStorage.removeItem("jwt");
-}
+};

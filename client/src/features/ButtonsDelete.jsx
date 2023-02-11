@@ -1,12 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { deleteAllTasks } from "../store/taskSlice";
+import {useTask} from "../hooks/useTask";
 
 function ButtonsDelete({ handleDeleteSelected, selectedTask }) {
   const dispatch = useDispatch();
-  const { tasks } = useSelector((state) => state.task);
+  const { tasks} = useTask()
+  const {token } = useSelector((state) => state.user);
 
   const handleDeleteAll = () => {
-    dispatch(deleteAllTasks());
+    dispatch(deleteAllTasks(token));
   };
   return (
     <div className="flex justify-between mb-4 border-b py-4">

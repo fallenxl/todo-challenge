@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
+import { apiUrl } from "../config/config.js";
 import axios from "axios";
-
-const apiUrl = "http://localhost:3000/api/task";
 
 const taskSlice = createSlice({
   name: "task",
@@ -31,7 +29,7 @@ export const { setTasks, setTasksIsFailed, setTasksIsLoading } =
 export const getApiTasks = (token) => async (dispatch) => {
   try {
     dispatch(setTasksIsLoading(true));
-    const { data } = await axios.get(apiUrl, {
+    const { data } = await axios.get(`${apiUrl}/task`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -44,51 +42,67 @@ export const getApiTasks = (token) => async (dispatch) => {
 };
 
 export const postApiTask =
-  ({ content }) =>
+  ({ content }, token) =>
   async (dispatch) => {
     try {
       dispatch(setTasksIsLoading(true));
-      await axios.post(apiUrl, { content });
-      dispatch(setTasksIsLoading(false));
-      dispatch(getApiTasks());
+      await axios.post(
+        `${apiUrl}/task`,
+        { content },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(getApiTasks(token));
     } catch (error) {
       dispatch(setTasksIsFailed(true));
     }
   };
 
-export const deleteApiTask = (id) => async (dispatch) => {
+export const deleteApiTask = (id, token) => async (dispatch) => {
   try {
     dispatch(setTasksIsLoading(true));
-    await axios.delete(`${apiUrl}/delete/${id}`);
-    dispatch(setTasksIsLoading(false));
-    dispatch(getApiTasks());
+    await axios.delete(`${apiUrl}/task/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch(getApiTasks(token));
   } catch (error) {
     dispatch(setTasksIsFailed(true));
   }
 };
 
 export const deleteApiTasks =
-  ({ selectedTask }) =>
+  ({ selectedTask, token }) =>
   async (dispatch) => {
     try {
-      dispatch(setTasksIsLoading(true));
-      await axios.delete(apiUrl + "/delete", {
+      await axios.delete(`${apiUrl}/task/delete`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         data: {
           tasksId: selectedTask,
         },
       });
+      dispatch(getApiTasks(token));
       dispatch(setTasksIsLoading(false));
-      dispatch(getApiTasks());
     } catch (error) {
       dispatch(setTasksIsFailed(true));
     }
   };
-export const deleteAllTasks = () => async (dispatch) => {
+export const deleteAllTasks = (token) => async (dispatch) => {
   try {
     dispatch(setTasksIsLoading(true));
-    await axios.delete(apiUrl);
+    await axios.delete(`${apiUrl}/task`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch(getApiTasks(token));
     dispatch(setTasksIsLoading(false));
-    dispatch(getApiTasks());
   } catch (error) {
     dispatch(setTasksIsFailed(true));
   }

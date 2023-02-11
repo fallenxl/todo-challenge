@@ -6,7 +6,7 @@ const User = sequelize.define("user", {
   id: {
     type: DataTypes.TEXT,
     primaryKey: true,
-    defaultValue: uuid(),
+    allowNull: false,
   },
   avatar: {
     type: DataTypes.TEXT,

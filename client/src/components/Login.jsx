@@ -1,20 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { login, getUser } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useCredentials } from "../hooks/useCredentials";
+
 function Login() {
   const { username, password, handlePassword, handleUsername } =
     useCredentials();
   const navigate = useNavigate();
 
-  const {user, token}= useSelector((state) => state.user);
+  const { user, token } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(login({ username, password }));
-  };
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
@@ -26,12 +22,20 @@ function Login() {
     }
   }, [token]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login({ username, password }));
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col border p-2 rounded-md gap-2"
+      className="flex flex-col p-2 rounded-md gap-2"
     >
-      <label htmlFor="username">Username:</label>
+      <h1 className="border-b-2 p-2 border-zinc-200 mb-2 font-bold">Login</h1>
+      <label className="text-xs font-semibold" htmlFor="username">
+        Username:
+      </label>
       <input
         className="border outline-none px-2 py-1 rounded-md text-sm"
         type="text"
@@ -39,7 +43,9 @@ function Login() {
         onChange={handleUsername}
         value={username}
       />
-      <label htmlFor="password">Password:</label>
+      <label className="text-xs font-semibold" htmlFor="password">
+        Password:
+      </label>
       <input
         className="border outline-none px-2 py-1 rounded-md text-sm"
         type="password"

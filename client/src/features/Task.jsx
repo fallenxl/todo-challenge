@@ -1,11 +1,13 @@
-import { useDispatch } from "react-redux";
-import { deleteApiTask } from "../store/taskSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteApiTask, getApiTasks } from "../store/taskSlice";
 
 function Task({ task = {}, handleSelected  }) {
+  const { token } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteApiTask(task.id));
+    dispatch(deleteApiTask(task.id, token));
+    dispatch(getApiTasks(token));
   };
   
   return (

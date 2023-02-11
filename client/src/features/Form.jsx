@@ -1,15 +1,16 @@
 import { useContent } from "../hooks/useContent";
-import { useDispatch } from "react-redux";
-import { postApiTask } from "../store/taskSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { postApiTask, getApiTasks } from "../store/taskSlice";
 
 function Form() {
   const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.user);
   const {content, handleContentChange, handleContentClear} = useContent();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!content) return;
-    dispatch(postApiTask({content}));
+    dispatch(postApiTask({content}, token));
     handleContentClear();
   }
   return (

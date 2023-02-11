@@ -9,8 +9,8 @@ import LoadingTasks from "../components/Loading/LoadingTasks";
 
 function TaskList() {
   const dispatch = useDispatch();
-  const { tasks, isLoading } = useSelector((state) => state.task);
-  const { token } = useSelector((state) => state.user);
+const {tasks} = useSelector((state) => state.task);
+  const { token, isLoading } = useSelector((state) => state.user);
   const { selectedTask, handleSelectedTask, handleClearSelectedTask } =
     useTask();
   const hasTasks = tasks.length > 0;
@@ -20,7 +20,7 @@ function TaskList() {
   }, []);
 
   const handleDeleteSelected = () => {
-    dispatch(deleteApiTasks({ selectedTask }));
+    dispatch(deleteApiTasks({ selectedTask, token }));
     handleClearSelectedTask();
   };
   return (

@@ -17,7 +17,7 @@ function Header() {
             <div className="flex gap-2 items-center justify-center">
               {!user ? (
                 <>
-                  <span className="font-bold text-sm">Inicia sesion</span>
+                  <span className="font-bold text-sm">Organiza mejor tu dia, con tareas 😎</span>
                 </>
               ) : (
                 <>
