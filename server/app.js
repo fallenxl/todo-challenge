@@ -30,9 +30,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-sequelize.sync({ force: false })
+sequelize.sync()
 .then(() => {console.log('Database is connected')});
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on port ${port}`);
 });
