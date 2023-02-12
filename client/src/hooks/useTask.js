@@ -1,37 +1,23 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getApiTasks } from "../store/taskSlice";
 
 export function useTask() {
-  const {tasks} = useSelector((state) => state.task);
-  const dispatch = useDispatch();
+  const { tasks } = useSelector((state) => state.task);
 
-  const [selectedTask, setSelectedTask] = useState([]);
-  const [isTaskAdded, setIsTaskAdded] = useState(false);
+  let selectedTask = tasks
+    .map((task) => {
+      if (task.done) {
+        return task.id;
+      }
+    })
+    .filter((task) => task);
 
-  useEffect(() => {
-    dispatch(getApiTasks());
-  },[isTaskAdded]);
-
-  const handleTaskAdded = () => {
-    setIsTaskAdded(!isTaskAdded);
-  }
-  const handleSelectedTask = (e) => {
-    const { id } = e.target;
-    !selectedTask.includes(id)
-      ? setSelectedTask([...selectedTask, id])
-      : setSelectedTask(selectedTask.filter((item) => item !== id));
-  };
 
   const handleClearSelectedTask = () => {
-    setSelectedTask([]);
-  }
+    selectedTask = null;
+  };
   return {
-    tasks,
     selectedTask,
-    handleSelectedTask,
-    getApiTasks,
-    handleTaskAdded,
     handleClearSelectedTask,
   };
 }

@@ -92,7 +92,6 @@ export const getUser = (token) => async (dispatch) => {
       },
     });
     if (response.status === 200) {
-      console.log(response.data);
       dispatch(setUser(response.data.user));
       dispatch(setToken(token));
     }

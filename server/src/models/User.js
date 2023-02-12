@@ -1,6 +1,7 @@
 const sequelize = require("../database/database.js");
 const { DataTypes } = require("sequelize");
 const uuid = require("uuid").v4;
+const Task = require("./Task.js");
 
 const User = sequelize.define("user", {
   id: {
@@ -28,5 +29,8 @@ const User = sequelize.define("user", {
 },{
     timestamps: false
 });
+
+User.hasMany(Task, { foreignKey: "userId", sourceKey: "id"})
+Task.belongsTo(User, { foreignKey: "userId", targetKey: "id"})
 
 module.exports = User;

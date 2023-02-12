@@ -13,6 +13,11 @@ const taskSlice = createSlice({
     setTasks: (state, action) => {
       state.tasks = action.payload;
     },
+    updateTask: (state, action) => {
+      const { id, done } = action.payload;
+      const index = state.tasks.findIndex((task) => task.id === id);
+      state.tasks[index].done = done;
+    },
     setTasksIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -23,7 +28,7 @@ const taskSlice = createSlice({
 });
 
 export default taskSlice.reducer;
-export const { setTasks, setTasksIsFailed, setTasksIsLoading } =
+export const { setTasks, setTasksIsFailed, setTasksIsLoading, updateTask } =
   taskSlice.actions;
 
 export const getApiTasks = (token) => async (dispatch) => {
@@ -61,6 +66,26 @@ export const postApiTask =
     }
   };
 
+export const putApiTask = (task, token) => async (dispatch) => {
+  try {
+    const { id, done } = task;
+    const response = await axios.put(
+      `${apiUrl}/task/update/${id}`,
+      {
+        task,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      dispatch(updateTask({ id, done }));
+    }
+  } catch (error) {}
+};
+
 export const deleteApiTask = (id, token) => async (dispatch) => {
   try {
     dispatch(setTasksIsLoading(true));
@@ -96,7 +121,7 @@ export const deleteApiTasks =
 export const deleteAllTasks = (token) => async (dispatch) => {
   try {
     dispatch(setTasksIsLoading(true));
-    await axios.delete(`${apiUrl}/task`, {
+    await axios.delete(`${apiUrl}/task/delete/all`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

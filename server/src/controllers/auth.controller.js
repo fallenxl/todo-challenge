@@ -17,7 +17,7 @@ const register = async (req, res) => {
       avatar: `https://api.dicebear.com/5.x/pixel-art-neutral/svg?seed=${username}`,
     });
     const token = createToken(user);
-    res.status(201).json({ username , avatar: user.avatar ,token });
+    res.status(201).json({id: user.id, username , avatar: user.avatar ,token });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -35,7 +35,7 @@ const login = async (req, res) => {
 
     const token = createToken(user);
 
-    res.status(200).json({ username , avatar: user.avatar ,token });
+    res.status(200).json({ id: user.id,username , avatar: user.avatar ,token });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
