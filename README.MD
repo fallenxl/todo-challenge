@@ -13,7 +13,7 @@
 ToDoToday is a todo list project developed frontend side with `react + vite`
 and server side with `nodejs (Express.js)`
 
-[🔗ToDoToday]: https://todo-challenge-production.up.railway.app/
+[🔗ToDoToday]:(https://todo-challenge-production.up.railway.app/)
 
 ### Install dependencies
 
