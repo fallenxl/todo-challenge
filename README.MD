@@ -1,3 +1,4 @@
+https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>
 # ToDoToday (Challenge)
 
 
@@ -26,4 +27,4 @@ run `yarn build && git push`.
 
 
 ## Deploying the site 🚀
-the site is deployed on `railway`, for which we use their database services.
+The site is deployed on `railway`, for which we use their database services.
