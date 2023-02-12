@@ -6,13 +6,13 @@
     </a>
 </p>
 
-`<p><a href="https://todo-challenge-production.up.railway.app/auth"> Go to ToDoToday</a></p>`
+
 
 # ToDoToday (Challenge)
 
 ToDoToday is a todo list project developed frontend side with `react + vite`
 and server side with `nodejs (Express.js)`
-
+<p><a href="https://todo-challenge-production.up.railway.app/auth"> 👓 Go to ToDoToday</a></p>
 ### Install dependencies
 
 ```bash
