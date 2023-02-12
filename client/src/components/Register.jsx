@@ -17,7 +17,7 @@ function Login() {
   const { user, token } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [isEqualsPassword, setIsEqualsPassword] = useState(true);
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -31,7 +31,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!comparePasswords()) {
-      return alert("Passwords don't match");
+      setIsEqualsPassword(false);
     }
     dispatch(register({ username, password }));
   };
@@ -44,6 +44,11 @@ function Login() {
       <h1 className="border-b-2 p-2 border-zinc-200 mb-2 font-bold">
         Register
       </h1>
+      {!isEqualsPassword && (
+        <span className="text-white text-xs bg-red-500 rounded-sm p-1 mt-1 mb-2 text-center">
+          {"Password doesn't match"}
+        </span>
+      )}
       <label className="text-xs font-semibold" htmlFor="username">
         Username:
       </label>

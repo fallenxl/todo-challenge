@@ -37,7 +37,7 @@ function Login() {
     >
       <h1 className="border-b-2 p-2 border-zinc-200 mb-2 font-bold">Login</h1>
       {userIsFailed && (
-        <p className="text-white text-xs bg-red-500 rounded-sm p-1 mt-1 mb-2 text-center">{userIsFailed}</p>
+        <span className="text-white text-xs bg-red-500 rounded-sm p-1 mt-1 mb-2 text-center">{userIsFailed}</span>
       )}
       <label className="text-xs font-semibold" htmlFor="username">
         Username:
