@@ -6,7 +6,7 @@ const taskSlice = createSlice({
   name: "task",
   initialState: {
     tasks: [],
-    isLoading: false,
+    isLoading: true,
     isFailed: false,
   },
   reducers: {
