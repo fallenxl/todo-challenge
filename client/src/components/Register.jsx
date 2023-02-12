@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { register, getUser } from "../store/userSlice";
 import { useCredentials } from "../hooks/useCredentials";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 function Login() {
   const {
@@ -32,6 +32,7 @@ function Login() {
     e.preventDefault();
     if (!comparePasswords()) {
       setIsEqualsPassword(false);
+      return;
     }
     dispatch(register({ username, password }));
   };
