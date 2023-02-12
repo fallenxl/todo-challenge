@@ -5,7 +5,7 @@ const indexRouter = require('./src/routes/index.routes.js');
 const sequelize = require('./src/database/database.js');
 const passport = require('passport');
 const app = express();
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT || 3000;
 require("./src/config/passport.js")
 
 /*
