@@ -16,10 +16,10 @@ function Form() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex gap-2 items-center justify-center mb-4 border-b pb-4"
+      className="flex gap-2 items-center justify-center mb-4 border-b pb-4 p-2"
     >
       <input
-        className="bg-zinc-200  rounded-md px-2 py-1 text-xs outline-none w-2/4"
+        className="bg-zinc-200 rounded-md px-2 py-1 text-md outline-none w-4/5 sm:text-sm"
         type="text"
         id="name"
         name="name"
@@ -27,7 +27,7 @@ function Form() {
         value={content}
         placeholder='"Buy milk, eggs, and bread"'
       />
-      <button className="flex items-center gap-2 border hover:bg-green-500 hover:text-white px-6 py-1 rounded-md text-xs">
+      <button className="flex items-center gap-2 border hover:bg-green-500 hover:text-white px-6 py-2 sm:py-1 rounded-md text-xs">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

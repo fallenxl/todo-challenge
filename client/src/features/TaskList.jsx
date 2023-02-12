@@ -25,7 +25,7 @@ const {tasks, isLoading } = useSelector((state) => state.task);
     handleClearSelectedTask();
   };
   return (
-    <section className="px-2">
+    <section className="px-4  sm:px-2">
   
       {hasTasks ? (
         <>

@@ -17,13 +17,13 @@ function Header() {
             <div className="flex gap-2 items-center justify-center">
               {!user ? (
                 <>
-                  <span className="font-bold text-xs">
-                    Organiza mejor tu dia, crea tareas diarias 😎
+                  <span className="font-bold text-xs sm:text-md">
+                    Organize your day better, create daily tasks 😎
                   </span>
                 </>
               ) : (
                 <>
-                  <span className="font-bold text-sm">{user.username}</span>
+                  <span className="font-bold text-md">{user.username}</span>
                   <img
                     className="w-6 h-6 rounded-full border-zinc-800 border-2"
                     src={user.avatar}
@@ -31,7 +31,7 @@ function Header() {
                   />
                   <button
                     onClick={handleLogout}
-                    className="border text-xs rotate-180 px-4 py-1 rounded-md hover:bg-gray-100 "
+                    className="border text-xs rotate-180 px-4 py-2 rounded-md hover:bg-gray-100 "
                     title="Logout"
                   >
                     <svg

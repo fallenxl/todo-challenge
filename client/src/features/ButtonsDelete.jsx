@@ -20,7 +20,7 @@ function ButtonsDelete({ handleDeleteSelected, selectedTask }) {
         {selectedTask.length > 0 && (
           <button
             onClick={handleDeleteSelected}
-            className="flex border hover:bg-green-500 hover:text-white gap-2 justify-self-end self-center px-6 py-1 rounded-md text-xs"
+            className="flex border hover:bg-green-500 hover:text-white gap-2 justify-self-end self-center px-6 py-2 sm:py-1 rounded-md text-xs"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ function ButtonsDelete({ handleDeleteSelected, selectedTask }) {
         )}
         <button
           onClick={handleDeleteAll}
-          className="flex border hover:bg-red-500 hover:text-white gap-1 justify-self-end self-center px-6 py-1 rounded-md text-xs"
+          className="flex border hover:bg-red-500 hover:text-white gap-1 justify-self-end self-center px-6 py-2 sm:py-1  rounded-md text-xs"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

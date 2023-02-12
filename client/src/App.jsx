@@ -14,7 +14,6 @@ import LoadingPage from "./pages/LoadingPage";
 
 function App() {
   const { user, userIsLoading } = useSelector((state) => state.user);
-  console.log(userIsLoading);
   return (
     <div className="app max-w-xl min-h-screen mx-auto">
       <Router>

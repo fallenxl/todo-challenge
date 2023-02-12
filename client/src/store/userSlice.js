@@ -8,7 +8,7 @@ const userSlice = createSlice({
     user: null,
     token: null,
     userIsLoading: false,
-    userIsFailed: false,
+    userIsFailed: null,
   },
   reducers: {
     setUser(state, action) {
@@ -33,6 +33,7 @@ export const {
   setUser,
   setToken,
   userIsLoading,
+  userIsFailed,
 } = userSlice.actions;
 
 export const login =
@@ -50,9 +51,9 @@ export const login =
         dispatch(setToken(response.data.token));
         localStorage.setItem("jwt", response.data.token);
       }
-      dispatch(userIsLoading(false));
+      dispatch(userIsFailed("User not found"));
     } catch (error) {
-      dispatch(userIsFailed(true));
+      dispatch(userIsFailed("User not found"));
     }
   };
 export const register =
@@ -69,9 +70,9 @@ export const register =
         dispatch(setToken(response.data.token));
         localStorage.setItem("jwt", response.data.token);
       }
-      dispatch(userIsLoading(false));
+      dispatch(userIsFailed("User already exists"));
     } catch (error) {
-      dispatch(userIsFailed(true));
+      dispatch(userIsFailed("User already exists"));
     }
   };
 
@@ -87,14 +88,15 @@ export const getUser = (token) => async (dispatch) => {
       dispatch(setUser(response.data.user));
       dispatch(setToken(token));
     }
-    dispatch(userIsLoading(false));
+    dispatch(userIsFailed("User not found"));
   } catch (error) {
-    dispatch(userIsFailed(true));
+    dispatch(userIsFailed("error while getting user"));
   }
 };
 
 export const logout = () => async (dispatch) => {
   dispatch(setUser(null));
   dispatch(setToken(null));
+  dispatch(userIsFailed(false));
   localStorage.removeItem("jwt");
 };

@@ -53,6 +53,8 @@ function Login() {
         name="username"
         onChange={handleUsername}
         value={username}
+        minLength="6"
+        required
       />
       <label className="text-xs font-semibold" htmlFor="password">
         Password:
@@ -63,16 +65,20 @@ function Login() {
         name="password"
         onChange={handlePassword}
         value={password}
+        minLength="6"
+        required
       />
       <label className="text-xs font-semibold" htmlFor="password">
         Repeat password:
       </label>
       <input
-        className="border outline-none px-2 py-1 rounded-md text-sm"
+        className="border outline-none px-2 py-1 rounded-md text-sm mb-4"
         type="password"
         name="password"
         onChange={handlePasswordConfirm}
         value={passwordConfirm}
+        minLength="6"
+        required
       />
       <button
         className="bg-zinc-800 rounded-md text-white py-1 text-sm"

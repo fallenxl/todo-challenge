@@ -4,7 +4,7 @@
 
 .app{
     display: grid;
-    grid-template-rows: 100px auto 1fr;
+    grid-template-rows: 100px 2fr 1fr;
 }
 
 .loader {

@@ -1,7 +1,7 @@
 function LoadingPage() {
   return (
-    <div class="loader">
-      <div class="spinner"></div>
+    <div className="loader">
+      <div className="spinner"></div>
     </div>
   );
 }
