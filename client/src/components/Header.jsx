@@ -17,8 +17,8 @@ function Header() {
             <div className="flex gap-2 items-center justify-center">
               {!user ? (
                 <>
-                  <span className="font-bold text-sm">
-                    Organiza mejor tu dia, con tareas 😎
+                  <span className="font-bold text-xs">
+                    Organiza mejor tu dia, crea tareas diarias 😎
                   </span>
                 </>
               ) : (
@@ -31,7 +31,7 @@ function Header() {
                   />
                   <button
                     onClick={handleLogout}
-                    className="text-xs rotate-180 p-2 hover:bg-gray-100 rounded-full"
+                    className="border text-xs rotate-180 px-4 py-1 rounded-md hover:bg-gray-100 "
                     title="Logout"
                   >
                     <svg
@@ -40,7 +40,7 @@ function Header() {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6"
+                      className="w-4 h-4"
                     >
                       <path
                         strokeLinecap="round"

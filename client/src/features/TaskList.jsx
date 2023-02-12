@@ -6,11 +6,12 @@ import { getApiTasks, deleteApiTasks } from "../store/taskSlice";
 import ButtonsDelete from "./ButtonsDelete";
 import EmptyTasks from "../components/EmptyTasks";
 import LoadingTasks from "../components/Loading/LoadingTasks";
+import { sortByDate } from "../config/config";
 
 function TaskList() {
   const dispatch = useDispatch();
-const {tasks} = useSelector((state) => state.task);
-  const { token, isLoading } = useSelector((state) => state.user);
+const {tasks, isLoading } = useSelector((state) => state.task);
+  const { token } = useSelector((state) => state.user);
   const { selectedTask, handleSelectedTask, handleClearSelectedTask } =
     useTask();
   const hasTasks = tasks.length > 0;
@@ -33,7 +34,7 @@ const {tasks} = useSelector((state) => state.task);
             selectedTask={selectedTask}
           />
           <ul className="mb-4">
-            {tasks.map((task) => (
+            {sortByDate(tasks).map((task) => (
               <Task
                 key={task.id}
                 task={task}

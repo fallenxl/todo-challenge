@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteApiTask, getApiTasks, putApiTask } from "../store/taskSlice";
-
-function Task({ task = {}}) {
+import { converDate } from "../config/config";
+function Task({ task = {} }) {
   const { token } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -9,11 +9,10 @@ function Task({ task = {}}) {
     dispatch(deleteApiTask(task.id, token));
     dispatch(getApiTasks(token));
   };
-  
-  const handleSelected = () => {
-    dispatch(putApiTask({...task, done: !task.done}, token));
 
-  }
+  const handleSelected = () => {
+    dispatch(putApiTask({ ...task, done: !task.done }, token));
+  };
   return (
     <li
       className="grid grid-cols-8 grid-rows-1 place-content-center items-center
@@ -26,7 +25,12 @@ function Task({ task = {}}) {
         className="w-4 h-4 "
         checked={task.done}
       />
-      <span className="col-start-2 col-end-7 sm:col-end-8">{task.content}</span>
+      <div className="col-start-2 col-end-7 sm:col-end-8 grid grid-rows-2 grid-cols-1">
+        <span className="">
+          {task.content}
+        </span>
+        <span className="text-xs text-gray-400">{converDate(task.createdAt)}</span>
+      </div>
       <button
         onClick={handleDelete}
         className="col-start-8 col-end-9 justify-self-end self-center px-4 py-2 rounded-md text-xs hover:bg-zinc-100"

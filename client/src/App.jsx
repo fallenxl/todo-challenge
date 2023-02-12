@@ -10,25 +10,29 @@ import Header from "./components/Header";
 import Auth from "./pages/Auth";
 import PrivateRoute from "./pages/PrivateRoute";
 import Home from "./pages/Home";
-import { useEffect } from "react";
-import { getUser } from "./store/userSlice";
-import { useNavigate } from "react-router-dom";
+import LoadingPage from "./pages/LoadingPage";
 
 function App() {
-  const {user} = useSelector((state) => state.user);
-  
+  const { user, userIsLoading } = useSelector((state) => state.user);
+  console.log(userIsLoading);
   return (
     <div className="app max-w-xl min-h-screen mx-auto">
       <Router>
-        <Header />
-        <Routes>
-        <Route  element={<PrivateRoute user={user}/>}>
-            <Route path="/" element={<Home/>} />
-        </Route>
-          <Route path="/auth" element={<Auth />} />
-          <Route path="*" element={<Navigate to="/auth" replace />} />
-        </Routes>
-        <Footer />
+        {!userIsLoading ? (
+          <>
+            <Header />
+            <Routes>
+              <Route element={<PrivateRoute user={user} />}>
+                <Route path="/" element={<Home />} />
+              </Route>
+              <Route path="/auth" element={<Auth />} />
+              <Route path="*" element={<Navigate to="/auth" />} replace />
+            </Routes>
+            <Footer />
+          </>
+        ) : (
+          <LoadingPage />
+        )}
       </Router>
     </div>
   );
