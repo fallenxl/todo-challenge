@@ -10,8 +10,8 @@
 
 # ToDoToday (Challenge)
 
-ToDoToday is a todo list project developed frontend side with `react + vite`
-and server side with `nodejs (Express.js)`
+ToDoToday is a todo list project developed frontend side with `React + Vite`
+and server side with `Nodejs (Express.js)`
 <p style="font-size: 12px;"><a href="https://todo-challenge-production.up.railway.app/auth" target="_blank"> 👓 Go to ToDoToday</a></p>
 
 ### Install dependencies
