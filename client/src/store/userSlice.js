@@ -29,12 +29,8 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const {
-  setUser,
-  setToken,
-  userIsLoading,
-  userIsFailed,
-} = userSlice.actions;
+export const { setUser, setToken, userIsLoading, userIsFailed } =
+  userSlice.actions;
 
 export const login =
   ({ username, password }) =>
@@ -51,6 +47,7 @@ export const login =
         dispatch(setToken(response.data.token));
         localStorage.setItem("jwt", response.data.token);
       }
+      dispatch(userIsLoading(false));
     } catch (error) {
       dispatch(userIsFailed("User not found"));
     }
@@ -69,6 +66,7 @@ export const register =
         dispatch(setToken(response.data.token));
         localStorage.setItem("jwt", response.data.token);
       }
+      dispatch(userIsLoading(false));
     } catch (error) {
       dispatch(userIsFailed("User already exists"));
     }
@@ -86,7 +84,7 @@ export const getUser = (token) => async (dispatch) => {
       dispatch(setUser(response.data.user));
       dispatch(setToken(token));
     }
-    dispatch(userIsFailed("User not found"));
+    dispatch(userIsLoading(false));
   } catch (error) {
     dispatch(userIsFailed(null));
     localStorage.removeItem("jwt");
