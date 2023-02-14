@@ -51,7 +51,6 @@ export const login =
         dispatch(setToken(response.data.token));
         localStorage.setItem("jwt", response.data.token);
       }
-      dispatch(userIsFailed("User not found"));
     } catch (error) {
       dispatch(userIsFailed("User not found"));
     }
@@ -70,7 +69,6 @@ export const register =
         dispatch(setToken(response.data.token));
         localStorage.setItem("jwt", response.data.token);
       }
-      dispatch(userIsFailed("User already exists"));
     } catch (error) {
       dispatch(userIsFailed("User already exists"));
     }
@@ -90,13 +88,14 @@ export const getUser = (token) => async (dispatch) => {
     }
     dispatch(userIsFailed("User not found"));
   } catch (error) {
-    dispatch(userIsFailed("error while getting user"));
+    dispatch(userIsFailed(null));
+    localStorage.removeItem("jwt");
   }
 };
 
 export const logout = () => async (dispatch) => {
   dispatch(setUser(null));
   dispatch(setToken(null));
-  dispatch(userIsFailed(false));
+  dispatch(userIsFailed(null));
   localStorage.removeItem("jwt");
 };
