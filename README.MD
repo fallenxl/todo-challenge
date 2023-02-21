@@ -41,14 +41,14 @@ Después de seguir los pasos de configuración, podrá acceder a la aplicación 
 ## Tecnologías utilizadas
 Este proyecto utiliza las siguientes tecnologías:
 
-`React+Vite`: Una herramienta para la construcción de aplicaciones web en tiempo real.
-`ReduxJS`: Una biblioteca para la gestión del estado de la aplicación.
-`NodeJS` utilizando ExpressJS: Un marco de aplicaciones web para NodeJS.
-`PassportJS`: Una biblioteca de autenticación para NodeJS.
-`JsonWebToken`: Un estándar de autenticación basado en tokens.
-`PostgresSQL`: Un sistema de gestión de bases de datos relacionales.
-`Sequelize`: Un ORM (Object-Relational Mapping) para NodeJS.
-`Railway`: Es una plataforma de alojamiento en la nube que simplifica el proceso de implementación de aplicaciones web.
+- `React+Vite`: Una herramienta para la construcción de aplicaciones web en tiempo real.
+- `ReduxJS`: Una biblioteca para la gestión del estado de la aplicación.
+- `NodeJS` utilizando ExpressJS: Un marco de aplicaciones web para NodeJS.
+- `PassportJS`: Una biblioteca de autenticación para NodeJS.
+- `JsonWebToken`: Un estándar de autenticación basado en tokens.
+- `PostgresSQL`: Un sistema de gestión de bases de datos relacionales.
+- `Sequelize`: Un ORM (Object-Relational Mapping) para NodeJS.
+- `Railway`: Es una plataforma de alojamiento en la nube que simplifica el proceso de implementación de aplicaciones web.
 
 ## Contribuir
 Si desea contribuir a este proyecto, ¡estamos encantados de tener su ayuda! Para hacerlo, siga estos pasos:
