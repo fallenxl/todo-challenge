@@ -18,6 +18,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isEqualsPassword, setIsEqualsPassword] = useState(true);
+
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -34,7 +35,7 @@ function Login() {
       setIsEqualsPassword(false);
       return;
     }
-    dispatch(register({ username, password }));
+    dispatch(register({ username: username.trim(), password }));
   };
 
   return (
